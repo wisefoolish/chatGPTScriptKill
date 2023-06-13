@@ -1,0 +1,2 @@
+# chatGPTScriptKill
+chatGPT 剧本杀，用线程池实现并发访问chatGPT的api，房间维护一个conversation，从而所有人都能游玩同一个剧本杀。
