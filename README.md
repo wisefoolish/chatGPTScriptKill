@@ -2,8 +2,11 @@
 chatGPT 剧本杀，用线程池实现并发访问chatGPT的api，房间维护一个conversation，从而所有人都能游玩同一个剧本杀。
 # 环境配置
 1、msvc qt，下载QT5.13 msvc版本，在visual studio上下载Qt插件，然后配置Qt version为Qt5.13 msvc qmake.exe，接着就能在visual studio上运行Qt部分代码。
+
 2、liboai库，https://github.com/D7EAD/liboai.git 这是它的github地址，我略微修改了下它的代码(因为看不太懂，只能自己微调一下来使用)，要用这个库需要nlohmann/json库，libcurl，这两个库的下载可以用vcpkg。
+
 3、ThreadPool，https://github.com/progschj/ThreadPool.git 借用了它的threadpool库，由于这份代码是c++11的，其中std::future<typename std::result_of<F(Args...)>::type>的std::result_of方法在c++17不被支持，而liboai用到了c++17标准的写法，为了统一，修改为std::future<typename std::invoke_result_t<F,Args...>>，std::invoke_result_t是为了推导出函数返回值，future是为了保存一个函数指针，可以用于异步执行函数内容，但是线程池里就没有用到异步调用的功能。
+
 4、设置ChatGPT API的密钥，在Server/源.cpp的795行有一个$CHATGPTKEY$，将它替换为自己的密钥就能在服务器上连接到ChatGPT了。
 
 # 项目介绍
